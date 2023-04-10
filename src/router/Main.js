@@ -24,8 +24,9 @@ function Main (){
  }
  async function getSearch(){
    const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=title&query=${search}`,{
-    headers:{Authorization:"KakaoAK e16aea1796fb93d18e3c697359d304c3"},
-    method:"GET",
+    headers:{ 
+        Authorization:"KakaoAK e16aea1796fb93d18e3c697359d304c3"},
+        method:"GET",
     })).json();
     setBooks(data.documents);
         console.log(data);
@@ -42,10 +43,10 @@ function Main (){
          {result? 
          books.map((item)=>
             <li key={item.isbn} className={styles.books__index}>
-                    <img className={styles.books__img} src={item.thumbnail} alt={item.isbn}/>
+                    <img className="styles.books__img" src={item.thumbnail} alt={item.isbn}/>
                 <div className={styles.books__detail}>
                     <h4 className={styles.books__title}>{item.title}</h4>
-                    <p className={styles.books__contents}>
+                    <p className="styles.books__contents">
                        {item.contents.length>100 ? 
                        item.contents.slice(0, 101): item.contents}
                     </p>
