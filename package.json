@@ -1,5 +1,5 @@
 {
-  "name": "museum-api",
+  "name": "books-api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "hompage": "https://sckcs15.github.io/museum-api"
+  "hompage": "https://sckcs15.github.io/books-api"
 }
