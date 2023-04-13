@@ -1,9 +1,0 @@
-body{
- display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.logo::first-letter{
- color:#33d9b2;
-}
-
