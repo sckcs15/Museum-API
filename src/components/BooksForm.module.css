@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tilt+Prism&display=swap');
+@font-face {
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.booksForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo{
+    font-size:72px;
+    margin:70px 0px;
+    font-family: 'Tilt Prism', cursive;
+    /* logo font */
+}
+.logo::first-letter{
+    color:#33d9b2;
+   }
+.books{
+    width: 700px;
+}
+.books__search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:50px;
+}
+.books__target, .books__text, .books__align{
+    border-color:rgba(128, 128, 128, 0.438);    
+    border-style: solid;
+    border-radius: 5px;
+    border-width:2px;
+}
+.books__target{
+    margin-right:3px;
+    width:77px;
+    height: 34px;
+    text-indent: 6px;
+    outline: none;
+}
+.books__text{
+    padding:0px 20px;
+    width: 260px;
+    height: 30px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    outline: none;
+}
+/* input text에 입력시 움찔하는 현상은 height와 line-height를 동일하게 작성하여 해결한다. */
+.books__text::placeholder{
+   text-indent:6px;
+}
+.books__btn{
+    width: 60px;
+    height: 36px;
+    font-weight: bold;
+    padding-bottom:4px;
+    margin-left:3px;
+    background-color:#33d9b2;
+    border:none;
+    border-radius: 5px;
+}
+/* input의 border 4면중 좌상, 우하 각각 색이 다른 것은 border style을 변경해줘야 한다. */
+.books__result{
+    width:700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;   
+}
+.books__result:nth-child(2){
+    padding-top:70px;
+}
+.books__align{
+    border-color:rgba(128, 128, 128, 0.438); 
+    width:100px;
+    height: 30px;
+    text-indent: 7px;
+    position: absolute;
+    top:10px;
+    right:100px;
+}
+.books__index{
+    width:500px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom:53px;
+    padding-bottom:14px;
+    border-bottom:1px solid rgba(0, 0, 0, 0.301);
+}
+.books__detail{
+    margin-left:30px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.books__title, .books__contents, .books__authors, .books__publisher{
+    font-family: 'OTWelcomeRA';
+}
+.books__title, .books__contents, .books__authors, .books__publisher, .books__img{
+    cursor: pointer;
+}
+.books__img{
+
+}
+.books__title{
+    margin: 15px 0px 0px 0px;
+    font-size:16px;
+   font-weight: 700;
+}
+.books__contents{
+    font-size:15px; 
+    letter-spacing: 1px;
+    line-height: 20px;
+}
+.books__authors{
+    font-size:14px;
+    font-weight: 700;
+    color:  #000000d7;
+}
+.books__publisher{
+    font-size:13px;
+}

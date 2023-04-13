@@ -1,11 +1,10 @@
-# Getting Started with Create React App
+# Books
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Kakao의 검색 api를 활용하여 검색어에 맞는 책들을 보여주는 프로젝트
 
-## Available Scripts
+## 사용기술
 
-In the project directory, you can run:
-
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white">
 ### `npm start`
 
 Runs the app in the development mode.\
