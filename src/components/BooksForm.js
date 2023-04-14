@@ -1,14 +1,18 @@
 import styles from "./BooksForm.module.css";
 import {useState} from "react";
-
+import BestSeller from "./BestSeller";
+import errorImage from "./no-image.jpeg";
 function BooksForm(){
     const[search, setSearch]  = useState("");
     //검색어 State
- const[result, setResult] =useState(false);
- //검색여부 State
- const[books, setBooks] = useState([]);
- //api로 부터 불러온 책들 State
- const[target, setTarget] = useState("title");
+    const[result, setResult] =useState(false);
+    //검색여부 State
+    const[books, setBooks] = useState([]);
+    //api로 부터 불러온 책들 State
+    const[target, setTarget] = useState("title");
+    //검색어의 카테고리 ex) 제목, 작가
+    let sort ="accuracy";
+    // 검색된 책의 정렬 ex) 정확도순, 발간일순
  const onChangeTarget = (event)=>{
      setTarget(event.target.value);
  }
@@ -21,6 +25,7 @@ function BooksForm(){
         setResult(false);
     }
     else{
+        sort="accuracy";
         getSearch();
         setResult(true);
     }
@@ -37,16 +42,24 @@ function BooksForm(){
  const onTextFocusOut = (event)=>{
     event.target.placeholder="검색어를 입력해주세요.";
  }
+ //text focus에 따른 placeholde
+const onChangeSort  = (event)=>{
+    sort = event.target.value;
+   getSearch();
+}
+// 검색된 책 정렬하여 검색 
+const noImage = (event)=>{
+ event.target.src=errorImage;
+}
  async function getSearch(){
-   const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}`,{
-    headers:{ 
+   const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}&sort=${sort}`
+    ,{headers:{ 
         Authorization:"KakaoAK e16aea1796fb93d18e3c697359d304c3"},
         method:"GET",
-        
     })).json();
     setBooks(data.documents);
-        console.log(data);
 }
+// fetch ajax
     return(
         <div className={styles.booksForm}>
         <h1 className={styles.logo}>Books</h1>
@@ -64,26 +77,29 @@ function BooksForm(){
             </div>
             <ul className={styles.books__result}>
             {result? 
-                <select className={styles.books__align}>
-                    <option value="accuracy">정확도순</option>
-                    <option value="latest">발간일순</option>
+                <select className={styles.books__align} onChange={onChangeSort} >
+                    <option value="accuracy" >정확도순</option>
+                    <option value="latest" >발간일순</option>
                 </select>
                 :null}
             {result? 
             books.map((item)=>
                 <li key={item.isbn} className={styles.books__index}>
-                        <img className={styles.books__img} src={item.thumbnail} alt={item.isbn}/>
+                        <img className={styles.books__img} src={item.thumbnail} onError={noImage} alt={item.isbn}/>
                     <div className={styles.books__detail}>
                         <h4 className={styles.books__title}>{item.title}</h4>
                         <p className={styles.books__contents}>
                         {item.contents.length>80 ? 
                         item.contents.slice(0, 81): item.contents}
                         </p>
-                        <p className={styles.books__authors}>{item.authors}</p>
+                        <div className={styles.books__authorsAndDatetime}>
+                            <span className={styles.books__authors}>{item.authors}</span>
+                            <span className={styles.books__datetime}>{item.datetime.slice(0,10)}</span>
+                        </div>
                         <p className={styles.books__publisher}>{item.publisher}</p>
                     </div>
                 </li>
-            ) : null} 
+            ) : <BestSeller/>} 
             </ul>
         </div>
     </div> 

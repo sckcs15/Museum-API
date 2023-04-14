@@ -82,22 +82,23 @@
     position: absolute;
     top:10px;
     right:100px;
+    outline: none;
 }
 .books__index{
     width:500px;
+    height: 189px;
     display: flex;
     justify-content: flex-start;
-    margin-bottom:53px;
-    padding-bottom:14px;
+    margin-bottom:42px;
+    padding-bottom:24px;
     border-bottom:1px solid rgba(0, 0, 0, 0.301);
 }
 .books__detail{
     margin-left:30px;
     display: flex;
     flex-direction: column;
-    gap:10px;
 }
-.books__title, .books__contents, .books__authors, .books__publisher{
+.books__title, .books__contents, .books__authors, .books__publisher, .books__datetime{
     font-family: 'OTWelcomeRA';
 }
 .books__title, .books__contents, .books__authors, .books__publisher, .books__img{
@@ -107,7 +108,7 @@
 
 }
 .books__title{
-    margin: 15px 0px 0px 0px;
+    margin: 15px 0px;
     font-size:16px;
    font-weight: 700;
 }
@@ -115,11 +116,19 @@
     font-size:15px; 
     letter-spacing: 1px;
     line-height: 20px;
+    margin-bottom:12px;
+}
+.books__authorsAndDatetime{
+    margin-bottom:10px;
+}
+.books__authors , .books__datetime{
+    font-weight: 700;
+    font-size: 13px;
 }
 .books__authors{
-    font-size:14px;
-    font-weight: 700;
     color:  #000000d7;
+    margin-bottom:7px;
+    margin-right:12px;
 }
 .books__publisher{
     font-size:13px;
