@@ -1,5 +1,5 @@
 import styles from "./BooksForm.module.css";
-import {useState} from "react";
+import {useState, useRef} from "react";
 import BestSeller from "./BestSeller";
 import errorImage from "./no-image.jpeg";
 function BooksForm(){
@@ -9,10 +9,13 @@ function BooksForm(){
     //검색여부 State
     const[books, setBooks] = useState([]);
     //api로 부터 불러온 책들 State
+    const[meta, setMeta] = useState("");
     const[target, setTarget] = useState("title");
     //검색어의 카테고리 ex) 제목, 작가
     let sort ="accuracy";
     // 검색된 책의 정렬 ex) 정확도순, 발간일순
+    const sortRef =useRef("");
+    //sort dom을 대체하여 사용한 useRef
  const onChangeTarget = (event)=>{
      setTarget(event.target.value);
  }
@@ -25,6 +28,9 @@ function BooksForm(){
         setResult(false);
     }
     else{
+        if(sortRef.current!=="" && books.length!==0){
+            sortRef.current.selected=true;
+        }
         sort="accuracy";
         getSearch();
         setResult(true);
@@ -51,6 +57,7 @@ const onChangeSort  = (event)=>{
 const noImage = (event)=>{
  event.target.src=errorImage;
 }
+//이미지가 없는 책은 이미지 없음 이미지 출력
  async function getSearch(){
    const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}&sort=${sort}`
     ,{headers:{ 
@@ -58,6 +65,7 @@ const noImage = (event)=>{
         method:"GET",
     })).json();
     setBooks(data.documents);
+    setMeta(data.meta);
 }
 // fetch ajax
     return(
@@ -75,13 +83,19 @@ const noImage = (event)=>{
                 value={search} placeholder="검색어를 입력해주세요."/>
                 <button className={styles.books__btn} onClick={onSearch} onKeyUp={onEnter} >검색</button>
             </div>
-            <ul className={styles.books__result}>
-            {result? 
-                <select className={styles.books__align} onChange={onChangeSort} >
-                    <option value="accuracy" >정확도순</option>
+            {result&&meta.total_count>0?
+                <p className={styles.books__total}>검색된 {meta.total_count}건의 문서</p>
+                :null}
+           {meta.total_count===0?
+            <p className={styles.books__noResult}>검색된 결과가 없습니다.</p>
+            :null}
+            {result&&meta.total_count>0? 
+                <select className={styles.books__align} onChange={onChangeSort}>
+                    <option value="accuracy"  ref={sortRef}>정확도순</option>
                     <option value="latest" >발간일순</option>
                 </select>
                 :null}
+            <ul className={styles.books__result}>
             {result? 
             books.map((item)=>
                 <li key={item.isbn} className={styles.books__index}>
@@ -90,10 +104,10 @@ const noImage = (event)=>{
                         <h4 className={styles.books__title}>{item.title}</h4>
                         <p className={styles.books__contents}>
                         {item.contents.length>80 ? 
-                        item.contents.slice(0, 81): item.contents}
+                        item.contents.slice(0, 81)+"...": item.contents}
                         </p>
                         <div className={styles.books__authorsAndDatetime}>
-                            <span className={styles.books__authors}>{item.authors}</span>
+                        {item.authors.length===0?null:<span className={styles.books__authors}>{item.authors}</span>}
                             <span className={styles.books__datetime}>{item.datetime.slice(0,10)}</span>
                         </div>
                         <p className={styles.books__publisher}>{item.publisher}</p>

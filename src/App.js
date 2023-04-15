@@ -16,5 +16,6 @@ function App (){
     ); 
     
 }
-
+// 결과물에 따른 page 만들기
+// 검색전 보여줄 것 만들기
 export default App;
