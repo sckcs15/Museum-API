@@ -18,11 +18,10 @@ function BooksForm(){
     //sort dom을 대체하여 사용한 useRef
  const onChangeTarget = (event)=>{
      setTarget(event.target.value);
- }
+ } //검색 카테고리 State에 넣어주는 함수
  const onChangeKeyword = (event)=>{
     setSearch(event.target.value);
-}   
-//검색어를 State에 넣어주는 함수
+}   //검색어를 State에 넣어주는 함수
  const onSearch = ()=>{
     if(search===""){
         setResult(false);
@@ -35,8 +34,7 @@ function BooksForm(){
         getSearch();
         setResult(true);
     }
-}
-//검색한 결과를 보여주는 함수
+}//검색한 결과를 보여주는 함수
  const onEnter = (event)=>{
  if(event.key==="Enter"){
         onSearch();
@@ -47,17 +45,17 @@ function BooksForm(){
  }
  const onTextFocusOut = (event)=>{
     event.target.placeholder="검색어를 입력해주세요.";
- }
- //text focus에 따른 placeholde
+ }//text focus에 따른 placeholde
 const onChangeSort  = (event)=>{
     sort = event.target.value;
    getSearch();
-}
-// 검색된 책 정렬하여 검색 
+}// 검색된 책 정렬하여 검색 
 const noImage = (event)=>{
  event.target.src=errorImage;
+}//이미지가 없는 책은 이미지 없음 이미지 출력
+const reloading = ()=>{
+    window.location.reload();
 }
-//이미지가 없는 책은 이미지 없음 이미지 출력
  async function getSearch(){
    const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}&sort=${sort}`
     ,{headers:{ 
@@ -66,11 +64,10 @@ const noImage = (event)=>{
     })).json();
     setBooks(data.documents);
     setMeta(data.meta);
-}
-// fetch ajax
+}// fetch ajax
     return(
         <div className={styles.booksForm}>
-        <h1 className={styles.logo}>Books</h1>
+        <h1 className={styles.logo} onClick={reloading}>Books</h1>
         <div className={styles.books}>
             <div className={styles.books__search}>
                 <select className={styles.books__target} onChange={onChangeTarget}>
@@ -113,9 +110,10 @@ const noImage = (event)=>{
                         <p className={styles.books__publisher}>{item.publisher}</p>
                     </div>
                 </li>
-            ) : <BestSeller/>} 
+            ) : null} 
             </ul>
         </div>
+        {result? null:  <BestSeller/>}
     </div> 
     );
 }

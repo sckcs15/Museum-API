@@ -17,5 +17,5 @@ function App (){
     
 }
 // 결과물에 따른 page 만들기
-// 검색전 보여줄 것 만들기
+//상세정보 contents 풀로 보여주는 정도
 export default App;

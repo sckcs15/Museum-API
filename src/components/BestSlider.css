@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.Container{
+    position: relative;
+    top:-150px;
+    width: 1280px;
+    overflow: hidden;
+}
+.slick-slider{
+    width: 220px;
+}
+.slick-track{
+    display: flex;
+}
+.slick-slide img{
+    width: 180px;
+    height: 267px; 
+    cursor: pointer;
+}
+.bestSlider__prev, .bestSlider__next{
+    background-color: #00000052;
+    top:100px;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+.bestSlider__next{
+    right:0px;
+}
+.bestSlider__prev{
+    left:0px;
+}

@@ -1,6 +1,10 @@
+import BestSlider from "./BestSlider";
+
+
 function BestSeller(){
+    
     return (
-        null
+        <BestSlider/>
     );
 }
 export default BestSeller;
