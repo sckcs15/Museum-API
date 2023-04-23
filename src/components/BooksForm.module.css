@@ -14,8 +14,8 @@
 .logo{
     font-size:72px;
     margin:70px 0px;
-    cursor: pointer;
     font-family: 'Tilt Prism', cursive;
+    cursor: pointer;
     /* logo font */
 }
 .logo::first-letter{

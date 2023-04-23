@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 .Container{
     position: relative;
     top:-150px;
@@ -20,6 +21,9 @@
     width: 180px;
     height: 267px; 
     cursor: pointer;
+}
+.bestSlider__img:focus{
+    outline: none;
 }
 .bestSlider__prev, .bestSlider__next{
     background-color: #00000052;

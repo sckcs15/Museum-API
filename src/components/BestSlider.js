@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import "./BestSlider.css";
 import errorImage from "./no-image.jpeg";
 import bestItem1 from "./bestSeller/best1.jpg";
@@ -15,7 +13,6 @@ import bestItem8 from "./bestSeller/best8.jpg";
 import bestItem9 from "./bestSeller/best9.jpg";
 import bestItem10 from "./bestSeller/best10.jpg";
 import arrowPrev from"./arrow-prev.png";
-// import BestSeller from './BestSeller';
 export default class BestSlider extends Component {
   render() {
  
