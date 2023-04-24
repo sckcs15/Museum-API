@@ -20,9 +20,9 @@ slick-slider를 통해 carousel도 구현해보았습니다.
 ## Preview
 
 <img src="./src/readme-img/preview1.png">
-
+<hr>
 <img src="./src/readme-img/preview2.png">
-
+<hr>
 <img src="./src/readme-img/preview3.png">
-
+<hr>
 <img src="./src/readme-img/preview4.png">
