@@ -68,7 +68,7 @@
 /* input의 border 4면중 좌상, 우하 각각 색이 다른 것은 border style을 변경해줘야 한다. */
 .books__result{
     margin-top:50px;
-    margin-bottom:150px;
+    margin-bottom:50px;
     width:1050px;
     display: grid;
     grid-template-columns: 500px 500px;
@@ -107,7 +107,7 @@
     display: flex;
     flex-direction: column;
 }
-.books__title, .books__contents, .books__authors, .books__publisher, .books__datetime, .books__total, .books__noResult{
+.books__title, .books__contents, .books__authors, .books__publisher, .books__datetime, .books__total, .books__noResult, .pages__number, .pages__prevnext{
     font-family: 'OTWelcomeRA';
 }
 .books__title, .books__contents, .books__authors, .books__publisher, .books__img{
@@ -137,6 +137,38 @@
 }
 .books__publisher{
     font-size:13px;
+}
+.pages {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    gap:3px;
+}
+.pages__pagesBox{
+    display: flex;
+    justify-content: space-between;
+    gap:8px;
+}
+.pages__number, .pages__prevnext{
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+}
+.pages__number{
+    width: 20px;
+    font-size:18px;
+}
+.pages__prevnext{
+    font-size: 14px;
+    width:40px;
+    line-height: 20px;
+}
+.pages__number:hover, .pages__prevnext:hover, .currentPage{
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+.currentPage{
+    font-weight: bold;
 }
 @media screen and (max-width:1100px) {
     .books__result{

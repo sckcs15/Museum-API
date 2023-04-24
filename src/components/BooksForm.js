@@ -55,18 +55,48 @@ const noImage = (event)=>{
 }//이미지가 없는 책은 이미지 없음 이미지 출력
 const reloading = ()=>{
     window.location.reload();
-}
- async function getSearch(){
-   const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}&sort=${sort}`
+}//페이지 새로고침
+const pageArr = [];
+const [pages, setPages] = useState([]);
+//페이지 수
+let currentPage = 1;
+//현재페이지
+const goPage = (event)=>{
+    currentPage = event.target.innerText;
+
+    const siblings = event.target.parentElement.children;
+    [...siblings].map((item, index)=>
+        item.className = styles.pages__number
+    )
+    //htmlCollection은 배열에 다시 담아줘야 map함수를 사용 가능하다.
+    //클릭한 페이지외에 나머지 페이지는 현재페이지 css제거
+    event.target.className = styles.pages__number +" "+ styles.currentPage;
+    //클릭한 페이지 현재페이지 css추가
+    onSearch();
+}// 선택한 페이지로 이동
+const [pageAble, setPageAble] = useState(0);
+// 5단위로 페이지를 몇번 넘기었는지
+const pagePrev = ()=>{
+    setPageAble(pageAble-1);
+}//넘긴횟수 -1  (5단위이므로 -5)
+const pageNext = ()=>{
+    setPageAble(pageAble+1);    
+}//넘긴횟수 +1 (5단위이므로 +5)
+async function getSearch(){
+   const data = await(await fetch(`https://dapi.kakao.com/v3/search/book?target=${target}&query=${search}&sort=${sort}&page=${currentPage}`
     ,{headers:{ 
         Authorization:"KakaoAK e16aea1796fb93d18e3c697359d304c3"},
         method:"GET",
     })).json();
     setBooks(data.documents);
     setMeta(data.meta);
+   for(let i=1; i<=Math.ceil(data.meta.pageable_count/10); i++ ){
+        pageArr.push(i);
+   }
+   setPages(pageArr);
 }// fetch ajax
     return(
-        <div className={styles.booksForm}>
+    <div className={styles.booksForm}>
         <h1 className={styles.logo} onClick={reloading}>Books</h1>
         <div className={styles.books}>
             <div className={styles.books__search}>
@@ -114,6 +144,19 @@ const reloading = ()=>{
             </ul>
         </div>
         {result? null:  <BestSeller/>}
+        {result? <div className={styles.pages}>
+            {pageAble===0? <p className={styles.pages__prevnext} ></p>: <p className={styles.pages__prevnext} onClick={pagePrev}>이전</p>}
+           <div className={styles.pages__pagesBox}>
+
+             
+        {pages.map((item, index)=> (
+            item>=1+(pageAble*5) && item<=5+(pageAble*5)?  <p className={item===1?styles.pages__number +" "+ styles.currentPage: styles.pages__number} key={index}  onClick={goPage} >{item}</p>   :null
+            )
+          )}
+
+            </div>
+        {pages.length/5-1<=pageAble  ? <p className={styles.pages__prevnext} ></p>: <p className={styles.pages__prevnext} onClick={pageNext}>다음</p>}      
+        </div> : null}
     </div> 
     );
 }

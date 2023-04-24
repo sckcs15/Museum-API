@@ -39,7 +39,7 @@ export default class BestSlider extends Component {
       slidesToScroll: 1,
       draggable : false,
       autoplay: true,
-      autoplaySpeed : 8000,
+      autoplaySpeed : 5000,
       prevArrow:<Prev/>,
       nextArrow:<Next/>,
     }; 
